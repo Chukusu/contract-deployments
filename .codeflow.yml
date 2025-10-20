@@ -1,3 +1,16 @@
-secure:
-  required_reviews: 2
-  requires_mfa: true
+import hashlib
+import json
+
+def calculate_block_hash(block):
+    """
+    Calculates the SHA-256 hash of a blockchain block.
+    
+    Parameters:
+    block (dict): The block data.
+    
+    Returns:
+    str: The hex digest of the hash.
+    """
+    # Convert the block to a JSON string with sorted keys for consistency
+    block_string = json.dumps(block, sort_keys=True).encode()
+    return hashlib.sha256(block_string).hexdigest()
